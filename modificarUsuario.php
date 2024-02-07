@@ -1,53 +1,66 @@
 <?php
-require 'vendor/autoload.php'; // Asegúrate de incluir el autoload de Composer
+require 'vendor/autoload.php';
 use eftec\bladeone\BladeOne;
 
 $views = __DIR__ . '/views';
 $cache = __DIR__ . '/cache';
 $blade = new BladeOne($views, $cache, BladeOne::MODE_AUTO);
 
-// Configuración de la conexión a la base de datos
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "usermgmt";
 
-// Intentar establecer la conexión
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Verificar la conexión
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
 session_start();
 
-// Verificar si el usuario está autenticado
 if (!isset($_SESSION['user_id'])) {
-    // Si el usuario no está autenticado, redirigir al formulario de inicio de sesión
     header('Location: login.php');
     exit();
 }
 
-// Obtener el ID del usuario autenticado
 $user_id = $_SESSION['user_id'];
 
-// Verificar si se ha enviado el formulario de modificación de perfil
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Procesar los datos del formulario
-    // Aquí deberías realizar la lógica para actualizar los datos del perfil en la base de datos
-    // Puedes obtener los datos del formulario utilizando $_POST['campo'] y actualizar la base de datos según sea necesario
+    $name = $_POST['username'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $painter_fk = $_POST['painter']; // Cambiado de 'painter' a 'painter_fk'
 
-    // Si se ha enviado el formulario para darse de baja
-    if (isset($_POST['delete_account'])) {
-        // Aquí deberías realizar la lógica para eliminar la cuenta del usuario de la base de datos
-        // Después de eliminar la cuenta, debes redirigir al usuario al formulario de inicio de sesión o a una página de confirmación
+    $stmt = $conn->prepare("UPDATE users SET name = ?, email = ?, password = ?, painter_fk = ? WHERE id = ?");
+    $stmt->bind_param("ssssi", $name, $email, $password, $painter_fk, $user_id);
+
+    if ($stmt->execute()) {
+        header('Location: arte.php');
+        exit();
+    } else {
+        echo "Error al actualizar los datos del usuario: " . $stmt->error;
     }
 
-    // Redirigir al usuario a una página de confirmación o a otra ubicación según sea necesario
-    // header('Location: confirmacion.php');
-    // exit();
+    $stmt->close();
 }
+
+$sql_user = "SELECT name, email, painter_fk FROM users WHERE id = ?";
+$stmt_user = $conn->prepare($sql_user);
+$stmt_user->bind_param("i", $user_id);
+$stmt_user->execute();
+$result_user = $stmt_user->get_result();
+
+if ($result_user->num_rows == 1) {
+    $row_user = $result_user->fetch_assoc();
+    $name = $row_user['name'];
+    $email = $row_user['email'];
+    $painter_fk = $row_user['painter_fk'];
+} else {
+    echo "Error: No se pudo obtener la información del usuario.";
+    exit();
+}
+
 
 // Obtener la lista de pintores desde la base de datos
 $sql = "SELECT id, name FROM painters";
@@ -67,6 +80,6 @@ while ($row = $result->fetch_assoc()) {
 // Cerrar la conexión a la base de datos
 $conn->close();
 
-// Renderizar la vista para modificar el perfil
-echo $blade->run("modificarUsuario_form", ["user_id" => $user_id, "painters" => $painters]);
+
+echo $blade->run("modificarUsuario_form", ["name" => $name, "email" => $email, "painters" => $painters]);
 ?>

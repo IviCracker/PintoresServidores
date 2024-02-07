@@ -17,7 +17,7 @@
                         <h2 class="mb-0">Modificar Usuario</h2>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="modificar.php">
+                        <form method="POST" action="modificarUsuario.php">
                             @csrf
                             <div class="form-group">
                                 <label for="username">Nombre de usuario:</label>
@@ -28,10 +28,14 @@
                                 <input type="email" id="email" name="email" class="form-control" value="{{ $email }}">
                             </div>
                             <div class="form-group">
+                                <label for="password">Contraseña:</label>
+                                <input type="password" id="password" name="password" class="form-control">
+                            </div>
+                            <div class="form-group">
                                 <label for="favorite_painter">Pintor favorito:</label>
-                                <select id="favorite_painter" name="favorite_painter" class="form-control">
+                                <select id="painter" name="painter">
                                     @foreach ($painters as $painter)
-                                    <option value="{{ $painter['id'] }}" @if ($painter['id'] == $favorite_painter) selected @endif>{{ $painter['name'] }}</option>
+                                        <option value="{{ $painter['id'] }}">{{ $painter['name'] }}</option>
                                     @endforeach
                                 </select>
                             </div>

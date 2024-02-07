@@ -33,6 +33,7 @@
         </div>
         @endforeach
         <a href="logout.php"  class="btn btn-danger">Volver al inicio</a>
+        <a href="modificarUsuario.php"  class="btn btn-danger">Modificar Usuario</a>
     </div>
 </div>
 
