@@ -1,0 +1,16 @@
+{
+    "name": "m/pintore-sservidores",
+    "autoload": {
+        "psr-4": {
+            "M\\PintoreSservidores\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "David"
+        }
+    ],
+    "require": {
+        "eftec/bladeone": "^4.11"
+    }
+}
