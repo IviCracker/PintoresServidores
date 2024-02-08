@@ -30,33 +30,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password_db = "";
     $dbname = "usermgmt";
 
-    $conn = new mysqli($servername, $username_db, $password_db, $dbname);
+    try {
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username_db, $password_db);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+        // Consultar la base de datos para verificar las credenciales
+        $stmt = $conn->prepare("SELECT id, password FROM users WHERE name = ?");
+        $stmt->execute([$username]);
+        $result = $stmt->fetchAll();
 
-    // Consultar la base de datos para verificar las credenciales
-    $stmt = $conn->prepare("SELECT id, password FROM users WHERE name = ?");
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $result = $stmt->get_result();
+        if (count($result) == 1) {
+            $hashed_password = $result[0]['password'];
 
-    if ($result->num_rows == 1) {
-        $row = $result->fetch_assoc();
-        $hashed_password = $row['password'];
-
-        // Verificar si la contraseña proporcionada coincide con la almacenada en la base de datos
-        if ($password === $hashed_password) {
-            // Credenciales válidas, iniciar sesión y redirigir al archivo con la plantilla de cupcakes
-            $_SESSION['user_id'] = $row['id'];
-            header('Location: arte.php');
-            exit();
+            // Verificar si la contraseña proporcionada coincide con la almacenada en la base de datos
+            if ($password === $hashed_password) {
+                // Credenciales válidas, iniciar sesión y redirigir al archivo con la plantilla de cupcakes
+                $_SESSION['user_id'] = $result[0]['id'];
+                header('Location: arte.php');
+                exit();
+            }
         }
-    }
 
-    // Credenciales inválidas, mostrar un mensaje de error
-    $error_message = "Credenciales inválidas. Por favor, inténtalo de nuevo.";
+        // Credenciales inválidas, mostrar un mensaje de error
+        $error_message = "Credenciales inválidas. Por favor, inténtalo de nuevo.";
+    } catch(PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
 }
 
 // Renderizar el formulario de inicio de sesión
