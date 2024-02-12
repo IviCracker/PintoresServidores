@@ -52,6 +52,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Cerrar la consulta
         $stmt->closeCursor();
+        
+            header('Location: login.php');
+           
+        
     } catch (PDOException $e) {
         // Mostrar mensaje de error al registrar el usuario
         echo "Error al registrar el usuario: " . $e->getMessage();
@@ -68,6 +72,8 @@ try {
     // Manejar errores al obtener la lista de pintores
     die("Error al obtener la lista de pintores: " . $e->getMessage());
 }
+
+
 
 // Renderizar el formulario de registro con la lista de pintores
 echo $blade->run("register", ["painters" => $painters]);
