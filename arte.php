@@ -7,7 +7,7 @@ $cache = __DIR__ . '/cache';
 $blade = new BladeOne($views, $cache, BladeOne::MODE_AUTO);
 
 session_start();
-
+echo $blade->run("bootstrapNav_form");
 // Verificar si el usuario está autenticado
 if (!isset($_SESSION['user_id'])) {
     // Si no está autenticado, redirigir al archivo de inicio de sesión
