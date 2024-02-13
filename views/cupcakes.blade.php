@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="http://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
     <title>Cuadros</title>
 
@@ -31,8 +30,7 @@
     
 
 <div class="container">
-    <h1>Cuadros favoritos
-        <small class="text-muted">Cuadros</small>
+    <h1>Tus Cuadros favoritos
     </h1>
     <div class="row" id="cupcakeDetails">
         @foreach($cupcakes as $cupcake)
@@ -47,9 +45,18 @@
         </div>
         @endforeach
     </div>
-    <a href="logout.php"  class="btn btn-danger">Volver al inicio</a>
-    <a href="modificarUsuario.php"  class="btn btn-danger">Modificar Usuario</a>
+    
 </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <p class="text-center">Hecho por Ivan Almendros Lozano, 2ºWEM, Madrid, España</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
 
 <script>
     function showCupcakeDetails(cupcake) {
@@ -86,7 +93,15 @@
         location.reload();
     }
 </script>
-
+<script>
+            let docTitle = document.title;
+            window.addEventListener('blur', () => {
+                document.title = "vuelve aqui🤬🖕";
+            });
+            window.addEventListener('focus', () => {
+                document.title = docTitle;
+            });
+        </script>
 
 </body>
 </html>

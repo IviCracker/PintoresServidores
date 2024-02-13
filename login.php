@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // Consultar la base de datos para verificar las credenciales
-        $stmt = $conn->prepare("SELECT id, password FROM users WHERE name = ?");
+        $stmt = $conn->prepare("SELECT id, name, password FROM users WHERE name = ?");
         $stmt->execute([$username]);
         $result = $stmt->fetchAll();
 
@@ -46,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($password === $hashed_password) {
                 // Credenciales válidas, iniciar sesión y redirigir al archivo con la plantilla de cupcakes
                 $_SESSION['user_id'] = $result[0]['id'];
+                $_SESSION['nombre_usuario'] = $result[0]['name']; // Almacenar el nombre de usuario en la sesión
                 header('Location: arte.php');
                 exit();
             }
