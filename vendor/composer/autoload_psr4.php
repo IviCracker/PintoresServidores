@@ -7,5 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'eftec\\bladeone\\' => array($vendorDir . '/eftec/bladeone/lib'),
-    'M\\PintoreSservidores\\' => array($baseDir . '/src'),
+    'eftec\\' => array($vendorDir . '/eftec/daoone/lib'),
+    'Ivial\\PintoresServidores\\' => array($baseDir . '/src'),
 );

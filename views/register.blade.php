@@ -5,13 +5,9 @@
     <link rel="stylesheet" href="http://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 </head>
 <body>
-    <h2>Modificar Usuario</h2>
-    <form method="POST" action="modificar.php">
-        <!-- Aquí puedes incluir los campos para modificar el usuario -->
-    </form>
-
+    
     <h2>Registro de Usuario</h2>
-    <form method="POST" action="register.php">
+    <form method="POST" action="controlador_register.php">
         <label for="name">Nombre:</label><br>
         <input type="text" id="name" name="name" ><br>
         
@@ -30,7 +26,7 @@
 
         
         <button type="submit" class="btn btn-danger">Registrarse</button>
-        <a href="login.php" class="btn btn-danger">Volver al inicio</a>
+        <a href="../controlador_login.php" class="btn btn-danger">Volver al inicio</a>
     </form>
 </body>
 </html>

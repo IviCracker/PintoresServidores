@@ -31,7 +31,7 @@
                 "lib/bladeonecli"
             ],
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "eftec\\bladeone\\": "lib/"
@@ -61,6 +61,63 @@
                 "source": "https://github.com/EFTEC/BladeOne/tree/4.11"
             },
             "install-path": "../eftec/bladeone"
+        },
+        {
+            "name": "eftec/daoone",
+            "version": "3.30",
+            "version_normalized": "3.30.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/EFTEC/DaoOne.git",
+                "reference": "603d391b7c0bc76b785d4c437507c182f55538d7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/EFTEC/DaoOne/zipball/603d391b7c0bc76b785d4c437507c182f55538d7",
+                "reference": "603d391b7c0bc76b785d4c437507c182f55538d7",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-mysqli": "*",
+                "ext-openssl": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.7 || ^6.5"
+            },
+            "suggest": {
+                "eftec/PdoOne": "It is an a new version of this library"
+            },
+            "time": "2020-02-13T17:08:22+00:00",
+            "type": "library",
+            "installation-source": "source",
+            "autoload": {
+                "psr-4": {
+                    "eftec\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jorge Castro Castillo",
+                    "homepage": "https://github.com/EFTEC/"
+                }
+            ],
+            "description": "Procedural MysqlI Data access class in a single Class",
+            "homepage": "https://github.com/EFTEC",
+            "keywords": [
+                "dao",
+                "mysqli",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/EFTEC/DaoOne/issues",
+                "source": "https://github.com/EFTEC/DaoOne/tree/3.30"
+            },
+            "install-path": "../eftec/daoone"
         }
     ],
     "dev": true,

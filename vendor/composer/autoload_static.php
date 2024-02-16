@@ -10,10 +10,11 @@ class ComposerStaticInitf8cc9d9b2b4880b1c295587429b63c9c
         'e' => 
         array (
             'eftec\\bladeone\\' => 15,
+            'eftec\\' => 6,
         ),
-        'M' => 
+        'I' => 
         array (
-            'M\\PintoreSservidores\\' => 21,
+            'Ivial\\PintoresServidores\\' => 25,
         ),
     );
 
@@ -22,7 +23,11 @@ class ComposerStaticInitf8cc9d9b2b4880b1c295587429b63c9c
         array (
             0 => __DIR__ . '/..' . '/eftec/bladeone/lib',
         ),
-        'M\\PintoreSservidores\\' => 
+        'eftec\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/eftec/daoone/lib',
+        ),
+        'Ivial\\PintoresServidores\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),

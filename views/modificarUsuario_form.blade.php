@@ -17,31 +17,32 @@
                         <h2 class="mb-0">Modificar Usuario</h2>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="modificarUsuario.php">
-                            @csrf
-                            <div class="form-group">
-                                <label for="username">Nombre de usuario:</label>
-                                <input type="text" id="username" name="username" class="form-control" value="{{ $username }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Correo electrónico:</label>
-                                <input type="email" id="email" name="email" class="form-control" value="{{ $email }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Contraseña:</label>
-                                <input type="password" id="password" name="password" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="favorite_painter">Pintor favorito:</label>
-                                <select id="painter" name="painter">
-                                    @foreach ($painters as $painter)
-                                        <option value="{{ $painter['id'] }}">{{ $painter['name'] }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-                            <a href="eliminar_cuenta.php" class="btn btn-danger">Eliminar Cuenta</a>
-                        </form>
+                    <form method="POST" action="controlador_modificarUsuario.php">
+                        @csrf
+                        <div class="form-group">
+                            <label for="username">Nombre de usuario:</label>
+                            <input type="text" id="username" name="username" class="form-control" value="{{ $name }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Correo electrónico:</label>
+                            <input type="email" id="email" name="email" class="form-control" value="{{ $email }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Contraseña:</label>
+                            <input type="password" id="password" name="password" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="painter">Pintor favorito:</label>
+                            <select id="painter" name="painter" class="form-control">
+                                @foreach ($pintores as $pintor)
+                                    <option value="{{ $pintor['id'] }}">{{ $pintor['name'] }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <button type="submit" name="guardar_cambios" class="btn btn-primary">Guardar Cambios</button>
+                        <button type="submit" name="eliminar_cuenta" class="btn btn-danger">Eliminar Cuenta</button>
+                    </form>
+
                     </div>
                 </div>
             </div>

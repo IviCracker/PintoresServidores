@@ -1,16 +1,20 @@
 {
-    "name": "m/pintore-sservidores",
+    "name": "ivial/pintores-servidores",
+    "type": "project",
+    "require": {
+        "eftec/daoone": "^3.30",
+        "eftec/bladeone": "^4.11"
+    },
+    "license": "MIT",
     "autoload": {
         "psr-4": {
-            "M\\PintoreSservidores\\": "src/"
+            "Ivial\\PintoresServidores\\": "src/"
         }
     },
     "authors": [
         {
-            "name": "David"
+            "name": "ivan almendros",
+            "email": "ivialmendros@gmail.com"
         }
-    ],
-    "require": {
-        "eftec/bladeone": "^4.11"
-    }
+    ]
 }

@@ -27,25 +27,21 @@
     </style>
 </head>
 <body>
-    
-
 <div class="container">
-    <h1>Tus Cuadros favoritos
-    </h1>
+    <h1>Tus Cuadros favoritos</h1>
     <div class="row" id="cupcakeDetails">
-        @foreach($cupcakes as $cupcake)
-        <div class="col-md-4">
-            <div class="card">
-                <img src="{{$cupcake['img']}}" class="card-img-top" alt="{{$cupcake['title']}}" onclick="showCupcakeDetails({{json_encode($cupcake)}})">
-                <div class="card-body">
-                    <h5 class="card-title">{{$cupcake['title']}}</h5>
+        <?php foreach($cupcakes as $cupcake): ?>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="<?php echo $cupcake['img']; ?>" class="card-img-top" alt="<?php echo $cupcake['title']; ?>" onclick="showCupcakeDetails(<?php echo htmlspecialchars(json_encode($cupcake), ENT_QUOTES, 'UTF-8'); ?>)">
+                    <div class="card-body">
+                        <h5 class="card-title"><?php echo $cupcake['title']; ?></h5>
+                    </div>
                 </div>
+                <br>
             </div>
-            <br>
-        </div>
-        @endforeach
+        <?php endforeach; ?>
     </div>
-    
 </div>
 <footer class="footer">
     <div class="container">
@@ -57,32 +53,35 @@
     </div>
 </footer>
 
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shCk5DR4DLevkspS7R4y4+80ILZ/6D7IpP+xr" crossorigin="anonymous"></script>
 
 <script>
     function showCupcakeDetails(cupcake) {
         // Construir el HTML con la información del cuadro seleccionado
-        var cupcakeDetailsHTML = `
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card">
-                        <img src="${cupcake['img']}" class="card-img-top" alt="${cupcake['title']}">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">${cupcake['title']}</h5>
-                            <p class="card-text">Descripción: ${cupcake['description']}</p>
-                            <p class="card-text">Período: ${cupcake['period']}</p>
-                            <p class="card-text">Técnica: ${cupcake['technique']}</p>
-                            <p class="card-text">Año: ${cupcake['year']}</p>
-                        </div>
-                    </div>
-                    <br>
-                    <button class="btn btn-danger" onclick="hideCupcakeDetails()">Cerrar</button>
-                </div>
-            </div>
-        `;
+        var cupcakeDetailsHTML = 
+            '<div class="row">' +
+                '<div class="col-md-6">' +
+                    '<div class="card">' +
+                        '<img src="' + cupcake.img + '" class="card-img-top" alt="' + cupcake.title + '">' +
+                    '</div>' +
+                '</div>' +
+                '<div class="col-md-6">' +
+                    '<div class="card">' +
+                        '<div class="card-body">' +
+                            '<h5 class="card-title">' + cupcake.title + '</h5>' +
+                            '<p class="card-text">Descripción: ' + cupcake.description + '</p>' +
+                            '<p class="card-text">Período: ' + cupcake.period + '</p>' +
+                            '<p class="card-text">Técnica: ' + cupcake.technique + '</p>' +
+                            '<p class="card-text">Año: ' + cupcake.year + '</p>' +
+                        '</div>' +
+                    '</div>' +
+                    '<br>' +
+                    '<button class="btn btn-danger" onclick="hideCupcakeDetails()">Cerrar</button>' +
+                '</div>' +
+            '</div>';
 
         // Mostrar la información del cuadro seleccionado
         document.getElementById('cupcakeDetails').innerHTML = cupcakeDetailsHTML;
@@ -93,15 +92,6 @@
         location.reload();
     }
 </script>
-<script>
-            let docTitle = document.title;
-            window.addEventListener('blur', () => {
-                document.title = "vuelve aqui🤬🖕";
-            });
-            window.addEventListener('focus', () => {
-                document.title = docTitle;
-            });
-        </script>
 
 </body>
 </html>
