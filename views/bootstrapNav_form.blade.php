@@ -29,9 +29,10 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
 <style>
+    
     .top-content{
         background-image: url(../assets/img/backgrounds/1.jpg);
-    }
+            }
 </style>
 </head>
 
@@ -56,14 +57,14 @@
                     <li><a href="../controladores/controlador_login.php">Inicio De Sesion</a></li>
                     <li><a href="../controladores/controlador_modificarUsuario.php">Modificar Usuario</a></li>
 
-                    <li><a class="btn btn-link-3" href="logout.php">Cerrar Sesion</a></li>
+                    <li><a class="btn btn-link-3" href="../controladores/controlador_logout.php">Cerrar Sesion</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
     <!-- Top content -->
-    <div class="top-content">
+    <div class="top-content" >
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 text wow fadeInLeft">

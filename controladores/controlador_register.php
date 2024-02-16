@@ -7,31 +7,32 @@ $cache = __DIR__ . '/cache';
 $blade = new BladeOne($views, $cache, BladeOne::MODE_AUTO);
 
 require '../modelo.php'; // Incluir el archivo del modelo
-
+echo "Error al actualizar los datos del usuario1";
 session_start();
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    echo "Error al actualizar los datos del usuario2";
+
     if (isset($_POST['registrarse'])) {
+        echo "Error al actualizar los datos del usuario3";
+
         // Obtener los datos del formulario
-        $name = $_POST['name'];
+        $username = $_POST['username'];
         $email = $_POST['email'];
-        $password = $_POST['password'];
+        $contraseña = $_POST['contraseña'];
         $painter_fk = $_POST['painter']; // Cambiado de 'painter' a 'painter_fk'
 
-        // Registrar el usuario en la base de datos
-        if (Modelo::registrarUsuario($name, $email, $password, $painter_fk)) {
-            // Redirigir a la página de inicio de sesión si el registro fue exitoso
-            header('Location: controlador_login.php');
+        // Actualizar los datos del usuario en la base de datos
+        if (Modelo::registrarUsuario($username, $email, $contraseña, $painter_fk)) {
+            // Redirigir a la página de arte si la actualización fue exitosa
+            header('Location: controlador_arte.php');
             exit();
         } else {
-            // Mostrar mensaje de error si hubo un problema durante el registro
-            echo "Error al registrarse.";
+            echo "Error al actualizar los datos del usuario.";
         }
-    } elseif (isset($_POST['volverInicio'])) {
-        // Redirigir al controlador de inicio de sesión si se presionó el botón "Volver al inicio"
-        header('Location: controlador_login.php');
-        exit();
     }
+}else{
+    echo "Error al actualizar aaaaa.";
+
 }
 
 // Obtener la lista de pintores desde el modelo

@@ -1,5 +1,5 @@
 <?php
-require 'vendor/autoload.php'; // Asegúrate de incluir el autoload de Composer
+require '../vendor/autoload.php'; // Asegúrate de incluir el autoload de Composer
 use eftec\bladeone\BladeOne;
 
 $views = __DIR__ . '/views';
@@ -176,30 +176,31 @@ class Modelo {
         // Destruir la sesión
         session_destroy();
     }
-
-    public static function registrarUsuario($name, $email, $password, $painter_fk) {
+    public static function registrarUsuario($username, $email, $contraseña, $painter_fk) {
         self::conectar();
-
+    
         try {
             // Preparar la consulta SQL para insertar un nuevo usuario
             $stmt = self::$conn->prepare("INSERT INTO users (name, password, email, painter_fk) VALUES (?, ?, ?, ?)");
-
+    
             // Verificar si la consulta SQL es válida
             if ($stmt === false) {
                 return false;
             }
-
+    
             // Ejecutar la consulta
-            $stmt->execute([$name, $password, $email, $painter_fk]);
-
+            $stmt->execute([$username, $contraseña, $email, $painter_fk]);
+    
             // Cerrar la consulta
             $stmt->closeCursor();
             
             return true;
         } catch (PDOException $e) {
             // Mostrar mensaje de error al registrar el usuario
+            echo "Error al registrar el usuario: " . $e->getMessage();
             return false;
-        }
+        } 
     }
+    
 }
 ?>

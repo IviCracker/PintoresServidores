@@ -16,6 +16,7 @@ $user_id = $_SESSION['user_id'];
 
 // Obtener los datos del usuario para prellenar el formulario
 $name = Modelo::obtenerNombreUsuario($user_id);
+$nombre_usuario = Modelo::obtenerNombreUsuario($user_id);
 $email = Modelo::obtenerEmailUsuario($user_id);
 
 // Si no se pudo obtener el nombre del usuario, mostrar un mensaje de error
@@ -62,5 +63,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 // Mostrar la vista de modificarUsuario
+echo $blade->run("bootstrapNav_form", ["nombre_usuario" => $nombre_usuario]);
 echo $blade->run("modificarUsuario_form", ["name" => $name, "email" => $email, "pintores" => $pintores]);
 ?>
