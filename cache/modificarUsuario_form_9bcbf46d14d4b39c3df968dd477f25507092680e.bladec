@@ -4,16 +4,33 @@
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <title>Modificar Usuario</title>
-
- <!-- Estilos Bootstrap -->
- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+ <style>
+ /* Estilos específicos para el formulario de Modificar Usuario */
+ .top-content{
+ 
+ 
+ background-image: url(../assets/img/backgrounds/cuadro.jpg);
+ 
+ }
+ .modify-user-form {
+ font-family: Arial, sans-serif;
+ background-color: #f8f9fa;
+ }
+ .modify-user-container {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ padding-top: 50px;
+ /* Altura del viewport */
+ }
+ </style>
 </head>
-<body>
- <div class="container mt-5">
+<body class="modify-user-form">
+ <div class="modify-user-container">
  <div class="row justify-content-center">
- <div class="col-md-6">
+ <div class="columna">
  <div class="card">
- <div class="card-header bg-primary text-white">
+ <div class="card-header">
  <h2 class="mb-0">Modificar Usuario</h2>
  </div>
  <div class="card-body">
@@ -40,10 +57,9 @@
  <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
  </select>
  </div>
- <button type="submit" name="guardar_cambios" class="btn btn-primary">Guardar Cambios</button>
- <button type="submit" name="eliminar_cuenta" class="btn btn-danger">Eliminar Cuenta</button>
+ <button type="submit" name="guardar_cambios" class="btn-primary mr-2">Guardar Cambios</button>
+ <button type="submit" name="eliminar_cuenta" class="btn-danger">Eliminar Cuenta</button>
  </form>
-
  </div>
  </div>
  </div>
