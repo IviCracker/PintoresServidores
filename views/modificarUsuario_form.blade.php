@@ -4,24 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modificar Usuario</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
     <style>
     /* Estilos específicos para el formulario de Modificar Usuario */
-    .top-content{
-        
-        
-    background-image: url(../assets/img/backgrounds/cuadro.jpg);
-        
-            }
+    .top-content {
+        background-image: url(../assets/img/backgrounds/cuadro.jpg);
+    }
+
+    /* Estilos para el formulario de Modificar Usuario */
     .modify-user-form {
         font-family: Arial, sans-serif;
         background-color: #f8f9fa;
     }
+
     .modify-user-container {
         display: flex;
         justify-content: center;
         align-items: center;
         padding-top: 50px;
-         /* Altura del viewport */
+    }
+
+    .modify-user-container button[type="submit"],
+    .modify-user-container button[type="submit"]:hover,
+    .modify-user-container button[type="button"],
+    .modify-user-container button[type="button"]:hover {
+        width: 49%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .modify-user-container .btn-primary {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    .modify-user-container .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .modify-user-container .btn-danger {
+        background-color: #dc3545;
+        color: #fff;
+    }
+
+    .modify-user-container .btn-danger:hover {
+        background-color: #c82333;
+    }
+
+    .alert-danger {
+        margin-bottom: 20px;
     }
     </style>
 </head>
@@ -34,6 +68,23 @@
                         <h2 class="mb-0">Modificar Usuario</h2>
                     </div>
                     <div class="card-body">
+                        <!-- Mostrar errores si están presentes y se ha enviado el formulario -->
+                        <?php if ($_SERVER['REQUEST_METHOD'] === 'POST'): ?>
+                            <div class="alert alert-danger" role="alert">
+                                <ul>
+                                    <?php if ($error_username !== ''): ?>
+                                        <li><?= $error_username ?></li>
+                                    <?php endif; ?>
+                                    <?php if ($error_email !== ''): ?>
+                                        <li><?= $error_email ?></li>
+                                    <?php endif; ?>
+                                    <?php if ($error_password !== ''): ?>
+                                        <li><?= $error_password ?></li>
+                                    <?php endif; ?>
+                                </ul>
+                            </div>
+                        <?php endif; ?>
+
                         <form method="POST" action="controlador_modificarUsuario.php">
                             @csrf
                             <div class="form-group">
@@ -47,6 +98,7 @@
                             <div class="form-group">
                                 <label for="password">Contraseña:</label>
                                 <input type="password" id="password" name="password" class="form-control" value="{{ $contraseña }}">
+                                <span id="togglePassword" class="toggle-password"><i class="fas fa-eye"></i></span>
                             </div>
                             <div class="form-group">
                                 <label for="painter">Pintor favorito:</label>
@@ -57,12 +109,38 @@
                                 </select>
                             </div>
                             <button type="submit" name="guardar_cambios" class="btn-primary mr-2">Guardar Cambios</button>
-                            <button type="submit" name="eliminar_cuenta" class="btn-danger">Eliminar Cuenta</button>
+                            <button type="submit" name="eliminar_cuenta" id="eliminar-cuenta-btn" class="btn btn-danger">Eliminar Cuenta</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <br><br><br>
+                    <p class="text-center">Hecho por Ivan Almendros Lozano, 2ºWEM, Madrid, España</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            var passwordField = document.getElementById('password');
+            var fieldType = passwordField.getAttribute('type');
+
+            if (fieldType === 'password') {
+                passwordField.setAttribute('type', 'text');
+                this.innerHTML = '<i class="fas fa-eye-slash"></i>';
+            } else {
+                passwordField.setAttribute('type', 'password');
+                this.innerHTML = '<i class="fas fa-eye"></i>';
+            }
+        });
+    </script>
 </body>
 </html>

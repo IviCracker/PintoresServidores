@@ -1,5 +1,8 @@
 <?php
 require '../Modelo.php';
+require '../vendor/autoload.php'; // Asegúrate de incluir el autoload de Composer
+
+use eftec\bladeone\BladeOne;
 
 session_start();
 
@@ -15,7 +18,6 @@ $user_id = $_SESSION['user_id'];
 
 // Obtener los datos del usuario para prellenar el formulario
 $name = Modelo::obtenerNombreUsuario($user_id);
-$nombre_usuario = Modelo::obtenerNombreUsuario($user_id);
 $contraseña = Modelo::obtenerContraseñaUsuario($user_id);
 $email = Modelo::obtenerEmailUsuario($user_id);
 
@@ -36,6 +38,12 @@ if (!$pintores) {
 // Variables para controlar el resaltado de errores
 $error_username = '';
 $error_email = '';
+$error_password = '';
+
+// Instanciar BladeOne
+$views = __DIR__ . '/../views'; // Ruta al directorio de vistas
+$cache = __DIR__ . '/../cache'; // Ruta al directorio de caché
+$blade = new BladeOne($views, $cache, BladeOne::MODE_AUTO);
 
 // Verificar si se está enviando un formulario de actualización o eliminación
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -44,23 +52,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $new_name = $_POST['username'];
         $new_email = $_POST['email'];
         $password = $_POST['password'];
-        $painter_fk = $_POST['painter']; // Cambiado de 'painter' a 'painter_fk'
+        $painter_fk = $_POST['painter'];
+
+        // Validar la contraseña
+        if (!Modelo::validarContraseña($password)) {
+            $error_password = 'La contraseña debe tener al menos 4 caracteres, una mayúscula, una minúscula y un carácter especial';
+        }
 
         // Validar si ya existe un usuario con el nuevo nombre
         if ($new_name !== $name && Modelo::existeNombreUsuario($new_name, $user_id)) {
-            $error_username = 'error'; // Marcar el campo de nombre de usuario como error
+            $error_username = 'Este nombre de usuario ya está en uso';
         }
 
         // Validar si ya existe un usuario con el nuevo correo electrónico
         if ($new_email !== $email && Modelo::existeCorreoUsuario($new_email, $user_id)) {
-            $error_email = 'error'; // Marcar el campo de correo electrónico como error
+            $error_email = 'Este correo ya está en uso';
         }
 
         // Si hay errores, no redireccionar
-        if ($error_username !== '' || $error_email !== '') {
+        if ($error_username !== '' || $error_email !== '' || $error_password !== '') {
             // Mostrar la vista de modificarUsuario con los errores
-            echo $blade->run("bootstrapNav_form", ["nombre_usuario" => $nombre_usuario]);
-            echo $blade->run("modificarUsuario_form", ["name" => $name, "email" => $email, "pintores" => $pintores, "error_username" => $error_username, "error_email" => $error_email]);
+            echo $blade->run("bootstrapNav_form", ["nombre_usuario" => $name]);
+            echo $blade->run("modificarUsuario_form", ["name" => $name,"contraseña" => $contraseña, "email" => $email, "pintores" => $pintores, "error_username" => $error_username, "error_email" => $error_email, "error_password" => $error_password]);
             exit(); // Detener la ejecución del script
         }
 
@@ -86,6 +99,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Mostrar la vista de modificarUsuario
-echo $blade->run("bootstrapNav_form", ["nombre_usuario" => $nombre_usuario]);
-echo $blade->run("modificarUsuario_form", ["name" => $name,"contraseña" => $contraseña, "email" => $email, "pintores" => $pintores, "error_username" => $error_username, "error_email" => $error_email]);
+echo $blade->run("bootstrapNav_form", ["nombre_usuario" => $name]);
+echo $blade->run("modificarUsuario_form", ["name" => $name,"contraseña" => $contraseña, "email" => $email, "pintores" => $pintores, "error_username" => $error_username, "error_email" => $error_email, "error_password" => $error_password]);
 ?>

@@ -265,6 +265,26 @@ class Modelo {
             return false;
         }
     }
+    public static function validarContraseña($password) {
+        // Validar si la contraseña cumple con los criterios requeridos
+        if (strlen($password) < 4) {
+            return false; // Contraseña demasiado corta
+        }
+    
+        if (!preg_match('/[A-Z]/', $password)) {
+            return false; // No hay al menos una mayúscula
+        }
+    
+        if (!preg_match('/[a-z]/', $password)) {
+            return false; // No hay al menos una minúscula
+        }
+    
+        if (!preg_match('/[^a-zA-Z\d]/', $password)) {
+            return false; // No hay al menos un carácter especial
+        }
+    
+        return true; // Contraseña válida
+    }
     
 }
 ?>

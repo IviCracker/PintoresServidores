@@ -8,59 +8,56 @@
 
  <style>
  /* Estilos específicos para el formulario de Modificar Usuario */
- .top-content{
- 
- 
+ .top-content {
  background-image: url(../assets/img/backgrounds/cuadro.jpg);
- 
  }
+
  /* Estilos para el formulario de Modificar Usuario */
-.modify-user-form {
+ .modify-user-form {
  font-family: Arial, sans-serif;
  background-color: #f8f9fa;
-}
+ }
 
-.modify-user-container {
+ .modify-user-container {
  display: flex;
  justify-content: center;
  align-items: center;
  padding-top: 50px;
-}
+ }
 
-.modify-user-container button[type="submit"],
-.modify-user-container button[type="submit"]:hover,
-.modify-user-container button[type="button"],
-.modify-user-container button[type="button"]:hover {
+ .modify-user-container button[type="submit"],
+ .modify-user-container button[type="submit"]:hover,
+ .modify-user-container button[type="button"],
+ .modify-user-container button[type="button"]:hover {
  width: 49%;
  padding: 10px;
  border: none;
  border-radius: 5px;
  cursor: pointer;
-}
+ }
 
-.modify-user-container .btn-primary {
+ .modify-user-container .btn-primary {
  background-color: #007bff;
  color: #fff;
-}
+ }
 
-.modify-user-container .btn-primary:hover {
+ .modify-user-container .btn-primary:hover {
  background-color: #0056b3;
-}
+ }
 
-.modify-user-container .btn-danger {
+ .modify-user-container .btn-danger {
  background-color: #dc3545;
  color: #fff;
-}
+ }
 
-.modify-user-container .btn-danger:hover {
+ .modify-user-container .btn-danger:hover {
  background-color: #c82333;
-}
+ }
 
-.alert-danger {
+ .alert-danger {
  margin-bottom: 20px;
-}
-
-</style>
+ }
+ </style>
 </head>
 <body class="modify-user-form">
  <div class="modify-user-container">
@@ -80,6 +77,9 @@
  <?php endif; ?>
  <?php if ($error_email !== ''): ?>
  <li><?= $error_email ?></li>
+ <?php endif; ?>
+ <?php if ($error_password !== ''): ?>
+ <li><?= $error_password ?></li>
  <?php endif; ?>
  </ul>
  </div>
@@ -117,8 +117,7 @@
  </div>
  </div>
  </div>
- 
- 
+
  <footer class="footer">
  <div class="container">
  <div class="row">
@@ -128,13 +127,13 @@
  </div>
  </div>
  </div>
-</footer>
-</body>
-<script>
-document.getElementById('togglePassword').addEventListener('click', function() {
+ </footer>
+
+ <script>
+ document.getElementById('togglePassword').addEventListener('click', function() {
  var passwordField = document.getElementById('password');
  var fieldType = passwordField.getAttribute('type');
- 
+
  if (fieldType === 'password') {
  passwordField.setAttribute('type', 'text');
  this.innerHTML = '<i class="fas fa-eye-slash"></i>';
@@ -142,7 +141,7 @@ document.getElementById('togglePassword').addEventListener('click', function() {
  passwordField.setAttribute('type', 'password');
  this.innerHTML = '<i class="fas fa-eye"></i>';
  }
-});
-</script>
-
+ });
+ </script>
+</body>
 </html>

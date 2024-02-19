@@ -5,61 +5,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar sesión</title>
     <style>
-        /* Estilos CSS para mejorar la apariencia del formulario (puedes personalizarlos según tus necesidades) */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .login-container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            width: 300px;
-        }
-        h2 {
-            margin-top: 0;
-        }
-        input[type="text"],
-        input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            box-sizing: border-box;
-        }
-        input[type="text"].error,
-        input[type="password"].error {
-            background-color: #ffcccc; /* Cambiar color de fondo a rojo */
-        }
-        input[type="submit"] {
-            width: 100%;
-            background-color: #4caf50;
-            color: #fff;
-            padding: 10px;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-        input[type="submit"]:hover {
-            background-color: #45a049;
-        }
-        .register-button {
-            background-color: #007bff;
-        }
-        .register-button:hover {
-            background-color: #0056b3;
-        }
-        .error-message {
-            color: red;
-        }
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    padding: 20px;
+}
+
+.login-container {
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+}
+
+.error-message {
+    color: red;
+    margin-bottom: 10px;
+}
+
+form input[type="text"],
+form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+form input[type="submit"],
+form input[type="button"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form input[type="submit"]:hover,
+form input[type="button"]:hover {
+    background-color: #0056b3;
+}
+
+.register-button {
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+}
+
+.register-button input[type="button"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.register-button input[type="button"]:hover {
+    background-color: #218838;
+}
+
     </style>
 </head>
 <body>
@@ -78,6 +93,7 @@
                 <p class="error-message"><?= $password_error ?></p>
             <?php endif; ?>
             <input type="submit" value="Iniciar sesión">
+            <br><br>
             <a href="controlador_register.php" class="register-button"><input type="button" value="Registrarse"></a>
         </form>
     </div>

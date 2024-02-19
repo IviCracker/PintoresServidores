@@ -1,39 +1,54 @@
 <?php
-require '../vendor/autoload.php'; // Asegúrate de incluir el autoload de Composer
+require '../vendor/autoload.php';
 use eftec\bladeone\BladeOne;
 
 $views = __DIR__ . '/views';
 $cache = __DIR__ . '/cache';
 $blade = new BladeOne($views, $cache, BladeOne::MODE_AUTO);
 
-require '../modelo.php'; // Incluir el archivo del modelo
+require '../modelo.php';
 session_start();
+
+$error_username = '';
+$error_email = '';
+$error_password = '';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    echo "Error al actualizar los datos del usuario2";
-
     if (isset($_POST['registrarse'])) {
-
-        // Obtener los datos del formulario
         $username = $_POST['username'];
         $email = $_POST['email'];
         $contraseña = $_POST['contraseña'];
-        $painter_fk = $_POST['painter']; // Cambiado de 'painter' a 'painter_fk'
+        $painter_fk = $_POST['painter'];
 
-        // Actualizar los datos del usuario en la base de datos
-        if (Modelo::registrarUsuario($username, $email, $contraseña, $painter_fk)) {
-            // Redirigir a la página de arte si la actualización fue exitosa
-            header('Location: controlador_arte.php');
-            exit();
-        } else {
+        if (Modelo::existeNombreUsuario($username)) {
+            $error_username = 'Este nombre de usuario ya está en uso';
+        }
+
+        if (Modelo::existeCorreoUsuario($email)) {
+            $error_email = 'Este correo ya está en uso';
+        }
+
+        if (!preg_match('/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){5,}$/', $contraseña)) {
+            $error_password = 'La contraseña debe tener al menos 5 caracteres, 1 mayúscula, 1 minúscula y un carácter especial';
+        }
+
+        if ($error_username === '' && $error_email === '' && $error_password === '') {
+            if (Modelo::registrarUsuario($username, $email, $contraseña, $painter_fk)) {
+                header('Location: controlador_arte.php');
+                exit();
+            } else {
+                echo "Error al registrar el usuario.";
+            }
         }
     }
-}else{
-
 }
 
-// Obtener la lista de pintores desde el modelo
 $painters = Modelo::obtenerPintores();
 
-// Renderizar el formulario de registro con la lista de pintores
-echo $blade->run("register", ["painters" => $painters]);
+echo $blade->run("register", [
+    "painters" => $painters,
+    "error_username" => $error_username,
+    "error_email" => $error_email,
+    "error_password" => $error_password
+]);
 ?>
