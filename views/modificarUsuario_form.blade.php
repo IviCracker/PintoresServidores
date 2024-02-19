@@ -46,7 +46,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="password">Contraseña:</label>
-                                <input type="password" id="password" name="password" class="form-control">
+                                <input type="password" id="password" name="password" class="form-control" value="{{ $contraseña }}">
                             </div>
                             <div class="form-group">
                                 <label for="painter">Pintor favorito:</label>

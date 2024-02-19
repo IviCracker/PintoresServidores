@@ -35,6 +35,10 @@
             border-radius: 3px;
             box-sizing: border-box;
         }
+        input[type="text"].error,
+        input[type="password"].error {
+            background-color: #ffcccc; /* Cambiar color de fondo a rojo */
+        }
         input[type="submit"] {
             width: 100%;
             background-color: #4caf50;
@@ -53,6 +57,9 @@
         .register-button:hover {
             background-color: #0056b3;
         }
+        .error-message {
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -62,8 +69,14 @@
             <p class="error-message"><?= $error_message ?></p>
         <?php endif; ?>
         <form method="POST" action="">
-            <input type="text" name="username" placeholder="Nombre de usuario" required><br>
-            <input type="password" name="password" placeholder="Contraseña" required><br>
+            <input type="text" name="username" placeholder="Nombre de usuario" class="<?= !empty($username_error) ? 'error' : '' ?>" required><br>
+            <?php if (!empty($username_error)): ?>
+                <p class="error-message"><?= $username_error ?></p>
+            <?php endif; ?>
+            <input type="password" name="password" placeholder="Contraseña" class="<?= !empty($password_error) ? 'error' : '' ?>" required><br>
+            <?php if (!empty($password_error)): ?>
+                <p class="error-message"><?= $password_error ?></p>
+            <?php endif; ?>
             <input type="submit" value="Iniciar sesión">
             <a href="controlador_register.php" class="register-button"><input type="button" value="Registrarse"></a>
         </form>

@@ -77,6 +77,21 @@ class Modelo {
             return false;
         }
     }
+    public static function obtenerContraseñaUsuario($user_id) {
+        self::conectar();
+    
+        try {
+            // Consultar la base de datos para obtener el nombre de usuario
+            $stmt = self::$conn->prepare("SELECT password FROM users WHERE id = ?");
+            $stmt->execute([$user_id]);
+            $nombre_usuario = $stmt->fetchColumn();
+    
+            return $nombre_usuario;
+        } catch(PDOException $e) {
+            // Manejar errores de la base de datos aquí
+            return false;
+        }
+    }
     public static function obtenerEmailUsuario($user_id) {
         self::conectar();
     
@@ -200,6 +215,55 @@ class Modelo {
             echo "Error al registrar el usuario: " . $e->getMessage();
             return false;
         } 
+    }
+    public static function existeNombreUsuario($username, $excludeUserId = null) {
+        self::conectar();
+        
+        try {
+            // Preparar la consulta SQL para verificar si ya existe un usuario con el mismo nombre
+            $sql = "SELECT COUNT(*) FROM users WHERE name = ?";
+            // Si se proporciona un ID de usuario a excluir, exclúyelo de la verificación
+            if ($excludeUserId !== null) {
+                $sql .= " AND id <> ?";
+            }
+            $stmt = self::$conn->prepare($sql);
+            if ($excludeUserId !== null) {
+                $stmt->execute([$username, $excludeUserId]);
+            } else {
+                $stmt->execute([$username]);
+            }
+            $count = $stmt->fetchColumn();
+            
+            return $count > 0; // Devuelve true si ya existe un usuario con el mismo nombre, false de lo contrario
+        } catch (PDOException $e) {
+            // Manejar errores de la base de datos aquí
+            return false;
+        }
+    }
+    
+    public static function existeCorreoUsuario($email, $excludeUserId = null) {
+        self::conectar();
+        
+        try {
+            // Preparar la consulta SQL para verificar si ya existe un usuario con el mismo correo electrónico
+            $sql = "SELECT COUNT(*) FROM users WHERE email = ?";
+            // Si se proporciona un ID de usuario a excluir, exclúyelo de la verificación
+            if ($excludeUserId !== null) {
+                $sql .= " AND id <> ?";
+            }
+            $stmt = self::$conn->prepare($sql);
+            if ($excludeUserId !== null) {
+                $stmt->execute([$email, $excludeUserId]);
+            } else {
+                $stmt->execute([$email]);
+            }
+            $count = $stmt->fetchColumn();
+            
+            return $count > 0; // Devuelve true si ya existe un usuario con el mismo correo electrónico, false de lo contrario
+        } catch (PDOException $e) {
+            // Manejar errores de la base de datos aquí
+            return false;
+        }
     }
     
 }

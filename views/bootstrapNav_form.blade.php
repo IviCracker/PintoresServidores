@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
 
@@ -51,7 +51,6 @@
             <div class="collapse navbar-collapse" id="top-navbar-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="../controladores/controlador_arte.php">Inicio</a></li>
-                    <li><a href="../controladores/controlador_login.php">Inicio De Sesion</a></li>
                     <li><a href="../controladores/controlador_modificarUsuario.php">Modificar Usuario</a></li>
 
                     <li><a class="btn btn-link-3" href="../controladores/controlador_logout.php">Cerrar Sesion</a></li>

@@ -7,13 +7,11 @@ $cache = __DIR__ . '/cache';
 $blade = new BladeOne($views, $cache, BladeOne::MODE_AUTO);
 
 require '../modelo.php'; // Incluir el archivo del modelo
-echo "Error al actualizar los datos del usuario1";
 session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo "Error al actualizar los datos del usuario2";
 
     if (isset($_POST['registrarse'])) {
-        echo "Error al actualizar los datos del usuario3";
 
         // Obtener los datos del formulario
         $username = $_POST['username'];
@@ -27,11 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: controlador_arte.php');
             exit();
         } else {
-            echo "Error al actualizar los datos del usuario.";
         }
     }
 }else{
-    echo "Error al actualizar aaaaa.";
 
 }
 
