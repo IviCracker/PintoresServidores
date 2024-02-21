@@ -8,6 +8,11 @@
     body {
     font-family: Arial, sans-serif;
     padding: 20px;
+    background-image:  url("../assets/img/backgrounds/register.jpeg");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 h2 {

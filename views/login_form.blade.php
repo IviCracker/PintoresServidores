@@ -10,7 +10,13 @@
     background-color: #f8f9fa;
     padding: 20px;
 }
-
+body{
+    background-image: url("../assets/img/backgrounds/login.jpg");
+    height: 80vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 .login-container {
     max-width: 400px;
     margin: 0 auto;
